@@ -25,16 +25,15 @@ function index()
 		form("aria2/files"), _("Files"), 2)
 
 	entry({"admin", "services", "aria2", "log"},
-		firstchild(), _("Log"), 3)
-
-	entry({"admin", "services", "aria2", "log", "view"},
-		template("aria2/log_template"))
-
-	entry({"admin", "services", "aria2", "log", "read"},
-		call("action_log_read"))
+		cbi("aria2/log"), _("Log"), 3)
 
 	entry({"admin", "services", "aria2", "status"},
 		call("action_status"))
+
+	entry({"admin", "services", "aria2", "get_log"},
+	    call("get_log")).leaf = true
+	entry({"admin", "services", "aria2", "clear_log"},
+	    call("clear_log")).leaf = true
 
 end
 
@@ -47,16 +46,12 @@ function action_status()
 	http.write_json(status)
 end
 
-function action_log_read()
-	local data = { log = "", syslog = "" }
+function get_log()
+    local log_file = uci:get("aria2", "main", "log") or "/var/log/aria2.log"
+	luci.http.write(luci.sys.exec('cat ' .. log_file))
+end
 
-	local log_file = uci:get("aria2", "main", "log") or "/var/log/aria2.log"
-	if fs.access(log_file) then
-		data.log = util.trim(sys.exec("tail -n 50 %s | sed 'x;1!H;$!d;x'" % log_file))
-	end
-
-	data.syslog = util.trim(sys.exec("logread | grep aria2 | tail -n 50 | sed 'x;1!H;$!d;x'"))
-
-	http.prepare_content("application/json")
-	http.write_json(data)
+function clear_log()
+    local log_file = uci:get("aria2", "main", "log") or "/var/log/aria2.log"
+	luci.sys.call('cat /dev/null > ' .. log_file)
 end

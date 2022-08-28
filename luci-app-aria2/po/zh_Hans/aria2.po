@@ -849,3 +849,6 @@ msgstr "预分配"
 #: applications/luci-app-aria2/luasrc/model/cbi/aria2/config.lua:456
 msgid "trunc"
 msgstr "trunc系统调测"
+
+msgid "Clear logs"
+msgstr "清空日志"
