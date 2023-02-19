@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ariang
-PKG_VERSION:=1.2.4
+PKG_VERSION:=1.3.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/mayswind/AriaNg-DailyBuild/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=0e2e2536c603176fc12e845e9c7f44b298c8e6cc0bd1e9d25964eeeb7c70b118
+PKG_HASH:=acc66673aab84d0cef1192df168b8122aba0577d92e82f5af595caed3e1d21fe
 PKG_BUILD_DIR:=$(BUILD_DIR)/AriaNg-DailyBuild-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Ansuel Smith <ansuelsmth@gmail.com>
