@@ -33,7 +33,7 @@
 	<p>
 		<%:Installed web interface: %>
 		<%- for _, v in pairs(uilist.installed) do %>
-		<input type="button" class="cbi-button" style="margin: 0 5px;" value="<%=uilist.supported[v]%>" onclick="openWebInterface('<%=v%>');" />
+		<input type="button" class="cbi-button cbi-button-reload" style="margin: 0 5px;" value="<%=uilist.supported[v]%>" onclick="openWebInterface('<%=v%>');" />
 		<%- end %>
 	</p>
 	<% end %>
@@ -45,8 +45,8 @@ XHR.poll(5, '<%=url("admin/services/aria2/status")%>', null,
 		var tb = document.getElementById('aria2_status');
 		if (data && tb) {
 			tb.innerHTML = data.running
-				? '<%:The Aria2 service is running.%>'
-				: '<%:The Aria2 service is not running.%>';
+				? '<em style=\"color:green\"><b><%:The Aria2 service is running.%></b></em>'
+				: '<em style=\"color:red\"><b><%:The Aria2 service is not running.%></b></em>';
 		}
 	}
 );
